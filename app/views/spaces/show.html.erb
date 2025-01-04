@@ -1,0 +1,7 @@
+<% @page_title = @space.title + " - " + @space.owner.name + "さんのスペース" %>
+<h1><%= @space.owner.name %>さんのスペース</h1>
+<h2><%= @space.title %></h2>
+
+<%= simple_format(@space.detail) %>
+
+

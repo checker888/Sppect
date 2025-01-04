@@ -6,6 +6,7 @@
   <% @spaces.each do |space| %>
     <h2><%= space.title %></h2>
     <p><%= truncate(space.subtitle, length: 80) %>
+    <%= link_to "もっと読む", space %></p>
 
     
   <% end %>
