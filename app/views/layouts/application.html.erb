@@ -7,9 +7,17 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application" %>
+    <%= javascript_include_tag "application", defer:true %>
   </head>
 
-  <body>
-    <%= yield %>
+   <body>
+    <div id="container">
+      <main>
+        <% if flash.notice %>
+          <p class="notice"><%= flash.notice %></p>
+        <% end %>
+        <%= yield %>
+      </main>
+    </div>
   </body>
 </html>
