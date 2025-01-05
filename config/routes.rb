@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resource :owner_session, only:[:create,:destroy]
   resources :spaces,except:[:destroy] do
     resources :reservations,except:[:destroy]
+    resources :reviews,except:[:destroy]
   end
   # resources :reservations,except:[:destroy]
   resources :owners do
@@ -15,5 +16,6 @@ Rails.application.routes.draw do
   
   resources :users do
     resources :reservations
+    resources :reviews
   end
 end
