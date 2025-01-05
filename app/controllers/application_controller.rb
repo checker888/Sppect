@@ -21,5 +21,8 @@ class ApplicationController < ActionController::Base
       cookies_signed_func(cookies.signed[:user_id])
     end
   end
-  
+
+  private def login_required
+    raise LoginRequired unless current_user
+  end
 end

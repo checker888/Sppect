@@ -1,7 +1,7 @@
 <% @page_title = @space.title + " - " + @space.owner.name + "さんのスペース" %>
 <h1><%= @space.owner.name %>さんのスペース</h1>
 <h2><%= @space.title %></h2>
-
+<%= link_to "予約する", new_space_reservation_path(@space) %></p>
 <%= simple_format(@space.detail) %>
 
 

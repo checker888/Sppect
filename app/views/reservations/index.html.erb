@@ -1,0 +1,13 @@
+<% @page_title = @owner ? @owner.name + "さんのスペース" : "スペース一覧" %>
+<h1><%= @page_title %></h1>
+
+
+<% if @reservations.present? %>
+  <% @reservations.each do |reservation| %>
+    <h2><%= "#{reservation.space.title}  #{reservation.reserve_start_time} ~ #{reservation.reserve_end_time} "%></h2>
+
+  <% end %>
+  <%= paginate @reservations%>
+<% else %>
+  <p>記事がありません。</p>
+<% end %>

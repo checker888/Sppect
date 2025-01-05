@@ -1,0 +1,20 @@
+<%= render "shared/errors", obj: @reservation %>
+
+<table class="attr">
+     <tr>
+    <th><%= form.label :reserve_start_time%></th>
+    <td><%= form.datetime_select :reserve_start_time,
+              start_year: 2000, end_year: Time.current.year + 1,
+              use_month_numbers: true %></td>
+  </tr>
+   <tr>
+    <th><%= form.label :reserve_end_time%></th>
+    <td><%= form.datetime_select :reserve_end_time,
+              start_year: 2000, end_year: Time.current.year + 1,
+              use_month_numbers: true %></td>
+  </tr>
+  <tr>
+    <th><%= form.label :status %></th>
+    <td><%= form.check_box :status%></td>
+  </tr>
+</table>

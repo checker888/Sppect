@@ -49,7 +49,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_01_04_044504) do
     t.integer "user_id"
     t.integer "space_id"
     t.datetime "reserve_start_time", null: false
-    t.string "reserve_end_time", null: false
+    t.datetime "reserve_end_time", null: false
     t.boolean "status", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

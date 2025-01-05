@@ -1,2 +1,4 @@
-<h1>Accounts#show</h1>
-<p>Find me in app/views/accounts/show.html.erb</p>
+<% @page_title = @user.name %>
+<div class="toolbar">
+    <%= link_to "予約したスペース一覧", user_reservations_path(@user)%> 
+</div>

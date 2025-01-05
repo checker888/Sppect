@@ -1,17 +1,16 @@
 Rails.application.routes.draw do
-  get 'accounts/show'
-  get 'accounts/new'
-  get 'accounts/edit'
   root "spaces#index"
   resource :account,except:[:destroy]
   resource :session, only:[:create,:destroy]
-
-
+  resources :spaces,except:[:destroy] do
+    resources :reservations,except:[:destroy]
+  end
+  # resources :reservations,except:[:destroy]
   resources :owners do
-    resources :spaces 
+    resources :spaces
   end
   
-  resources :spaces do
-
+  resources :users do
+    resources :reservations
   end
 end

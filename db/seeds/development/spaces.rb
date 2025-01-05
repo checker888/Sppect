@@ -10,11 +10,10 @@ sub =
 %w(Owner1 Owner2 Owner3 Owner4 Owner5).each do |name|
   owner = Owner.find_by!(name: name)
   # category = categories[idx % categories.size]
-  category = Category.all
-
+  category = categories
   Space.create(
     owner: owner,  # アソシエーションを使用
-    category: category,  # アソシエーションを使用
+    categories: category,  # アソシエーションを使用
     title: "スペース#{idx + 1}",
     subtitle: sub,
     price: 2500,
