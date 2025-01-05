@@ -9,7 +9,7 @@ class AccountsController < ApplicationController
   def create
     @user = Member.new(params[:account])
     if @user.save
-      cookies_signed_func(@user.id)
+      user_cookies_signed_func(@user.id)
       redirect_to :root, notice: "会員登録が完了しました。"
     else
       render "new"

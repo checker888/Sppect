@@ -1,0 +1,16 @@
+<h2>ログイン(オーナー)</h2>
+<% if flash.alert %><p class="alert"><%= flash.alert %></p><% end %>
+<%= form_tag :owner_session, id: "owner-login-form" do %>
+  <div>
+    <label>ユーザー名：</label>
+    <input type="text" name="name">
+  </div>
+  <div>
+    <label>パスワード：</label>
+    <input type="password" name="password">
+  </div>
+  <div>
+    <input type="submit" value="ログイン">
+  </div>
+  <%= link_to "新規オーナー登録はこちら", :new_owner_account%>
+<% end %>

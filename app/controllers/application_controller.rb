@@ -9,8 +9,14 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_owner
   
-  def cookies_signed_func(value)
+  def user_cookies_signed_func(value)
     cookies.signed[:user_id] = {
+      value: value,
+      expires: 1.day.from_now
+    }
+  end
+  def owner_cookies_signed_func(value)
+    cookies.signed[:owner_id] = {
       value: value,
       expires: 1.day.from_now
     }
@@ -18,11 +24,15 @@ class ApplicationController < ActionController::Base
 
   private def update_expiration_time
     if current_user
-      cookies_signed_func(cookies.signed[:user_id])
+      user_cookies_signed_func(cookies.signed[:user_id])
+    elsif current_owner
+      owner_cookies_signed_func(cookies.signed[:owner_id])
     end
   end
 
   private def login_required
-    raise LoginRequired unless current_user
+    if !current_owner && !current_user
+      raise LoginRequired
+    end
   end
 end

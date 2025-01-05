@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
+  get 'login/index'
   root "spaces#index"
   resource :account,except:[:destroy]
+  resource :owner_account, except:[:destroy]
   resource :session, only:[:create,:destroy]
+  resource :owner_session, only:[:create,:destroy]
   resources :spaces,except:[:destroy] do
     resources :reservations,except:[:destroy]
   end
