@@ -1,2 +1,8 @@
-<h1>Accounts#edit</h1>
-<p>Find me in app/views/accounts/edit.html.erb</p>
+<% @page_title = "ユーザー情報編集" %>
+
+<h1><%= @page_title %></h1>
+
+<%= form_for @user ,as: "account",url: :account do |form| %>
+  <%= render "form", form: form %>
+  <div><%= form.submit %></div>
+<% end %>
