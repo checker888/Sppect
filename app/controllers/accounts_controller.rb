@@ -7,7 +7,7 @@ class AccountsController < ApplicationController
   end
 
   def create
-    @user = Member.new(params[:account])
+    @user = User.new(params[:account])
     if @user.save
       user_cookies_signed_func(@user.id)
       redirect_to :root, notice: "会員登録が完了しました。"
@@ -32,5 +32,10 @@ class AccountsController < ApplicationController
     else
       render "edit"
     end
+  end
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    redirect_to :users, notice: "会員を削除しました。"
   end
 end

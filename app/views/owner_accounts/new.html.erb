@@ -2,7 +2,7 @@
 
 <h1><%= @page_title %></h1>
 
-<%= form_for @user ,as: "account",url: :account do |form| %>
+<%= form_for @owner ,as: "owner_account",url: :owner_account do |form| %>
   <%= render "form", form: form %>
   <div><%= form.submit %></div>
 <% end %>
