@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :spaces,except:[:destroy] do
     resources :reservations,except:[:destroy]
     resources :reviews,except:[:destroy]
-    patch "like","unlike",on: :member
+    patch "like","unlike",on: :member #ここはmemberでいい
     get "liked",on: :collection
   end
   # resources :reservations,except:[:destroy]
