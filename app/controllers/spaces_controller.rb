@@ -31,12 +31,12 @@ class SpacesController < ApplicationController
     redirect_to @space,notice: "¥お気に入りを取り消しました。"
   end
 
-  def voted
+  def liked
     if params[:user_id]
       @user = User.find(params[:user_id])
     else
       @user = current_user
     end
-    @spaces = @user.voted_spaces.order("likes.created_at DESC").page(params[:page]).per(15)
+    @spaces = @user.liked_spaces.order("likes.created_at DESC").page(params[:page]).per(15)
   end
 end

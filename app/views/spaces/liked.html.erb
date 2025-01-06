@@ -1,0 +1,19 @@
+<% @page_title = "お気に入りスペース" %>
+<h1><%= @page_title %></h1>
+
+<% if @spaces.present? %>
+  <ul>
+    <% @spaces.each do |space| %>
+    <li>
+      <%= link_to space.title, space %>
+      <%if current_user == @user%>
+      - <%= link_to "お気に入りから削除", [:unlike, space], method: :patch,
+              data: { confirm: "お気に入りから削除しますか?" } %>
+      <%end%>
+    </li>
+    <% end %>
+  </ul>
+  <%= paginate @spaces %>
+<% else %>
+  <p>お気に入りスペースがありません。</p>
+<% end %>

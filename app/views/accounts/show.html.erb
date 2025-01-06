@@ -1,5 +1,6 @@
 <% @page_title = @user.name %>
 <div class="toolbar">
     <%= menu_link_to "ユーザ情報の編集", :edit_account%> 
-    <%= link_to "予約したスペース一覧", user_reservations_path(@user)%> 
+    <%= link_to "予約したスペース一覧", user_reservations_path(@user)%>
+    <%= link_to "お気に入りスペース一覧", liked_user_spaces_path(@user)%>  
 </div>

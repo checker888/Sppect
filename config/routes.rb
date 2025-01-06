@@ -19,5 +19,8 @@ Rails.application.routes.draw do
   resources :users do
     resources :reservations
     resources :reviews
+    resources :spaces, only: [:index] do
+      get "liked", on: :collection
+    end
   end
 end
