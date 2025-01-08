@@ -1,18 +1,48 @@
 <% @page_title = @space.title + " - " + @space.owner.name + "さんのスペース" %>
-<h1><%= @space.owner.name %>さんのスペース</h1>
+<h1>
+    <%= @space.owner.name %>さんのスペース    
+    <% if !@space.approval %>
+    (承認待ち)
+    <%elsif !@space.available%>
+    (公開停止中)
+    <%else %>
+    (公開中)
+    <% end %>
+</h1>
 <h2><%= @space.title %></h2>
 <% if @space.owner == current_owner %>
-    <%= link_to "登録情報を編集する", edit_owner_space_path(current_owner) %></p>
+    <%= link_to "登録情報を編集する", edit_owner_space_path(current_owner) %>
+    <% if @space.available%>
+        <%= link_to "スペースの公開を停止する", [:private_available, @space],
+        method: :patch, class: "button",
+        data: { confirm: "スペースの公開を停止しますか?" }%>
+    <% elsif%>
+        <%= link_to "スペースを公開する", [:public_available, @space],
+        method: :patch, class: "button",
+        data: { confirm: "スペースを公開しますか?" }%>
+    <%= link_to "スペースの削除", [@owner,@space], method: :delete,
+              data: { confirm: "本当に削除しますか?" } %>
+    <% end%>
+    
 <%end%>
 <p><%=@space.available_start_time.strftime( "%H:%M" )%> ~ <%=@space.available_end_time.strftime( "%H:%M" )%></p>
 
 
 
-<%= link_to "予約する", new_space_reservation_path(@space) %></p>
+<p><%= link_to "予約する", new_space_reservation_path(@space) %></p>
 <% if @genres.present? %>
+<p>
   <% @genres.each do |genre| %>
-    <%=genre.name%>
+    <%=genre.name %>
   <%end%>
+  </p>
+<%end%>
+<% if @facilities.present? %>
+<p>
+  <% @facilities.each do |facility| %>
+    <%=facility.name%>
+  <%end%>
+    </p>
 <%end%>
 <%=render "likes"%>
 <%= simple_format(@space.detail) %>

@@ -1,6 +1,22 @@
 class SpacesController < ApplicationController
   def search
-    @spaces = Space.search(params[:q],params[:sex]).page(params[:page]).per(15)
+    @spaces = Space.search(params[:q]).where(approval: true,available: true).page(params[:page]).per(3)
+    @genre_ids = params[:genre_ids]&.select(&:present?)
+    if @genre_ids.present?
+      @genre_word = "ジャンル："
+      @genre_ids.each do |id|
+        @genre_word = @genre_word + ' ' + Genre.find(id).name if id != ""
+      end
+      @spaces = @spaces.joins(:space_genre_relations).where(space_genre_relations: {genre_id: @genre_ids}).group("spaces.id").having("count(*) = #{@genre_ids.length}")
+    end
+    @facility_ids = params[:facility_ids]&.select(&:present?)
+    if @facility_ids.present?
+      @facility_word = "設備："
+      @facility_ids.each do |id|
+        @gfacility_word = @facility_word + ' ' + Facility.find(id).name if id != ""
+      end
+      @spaces = @spaces.joins(:space_facility_relations).where(space_facility_relations: {facility_id: @facility_ids}).group("spaces.id").having("count(*) = #{@facility_ids.length}")
+    end
     render "index"
   end
 
@@ -9,7 +25,7 @@ class SpacesController < ApplicationController
       @owner = Owner.find(params[:owner_id])
       @spaces = @owner.spaces
     else
-      @spaces = Space.where(approval: true)
+      @spaces = Space.where(approval: true,available: true)
     end
     @spaces = @spaces.order(posted_at: :desc).page(params[:page]).per(3)
   end
@@ -18,6 +34,7 @@ class SpacesController < ApplicationController
   def show
     @space = Space.find(params[:id])
     @genres = @space.genres
+    @facilities = @space.facilities
     @reviews = @space.reviews
     if current_user && !current_user.review_writable_for?(@space)
       @review = current_user.reviews.find_by(space: @space)
@@ -61,4 +78,40 @@ class SpacesController < ApplicationController
       render "new"
     end
   end
+
+
+  def edit
+    @owner = current_owner
+    @space = current_owner.spaces.find_by(owner: @owner)
+  end
+
+  def update
+    @owner = current_owner
+    @space = current_owner.spaces.find_by(owner: @owner)
+    @space.assign_attributes(params[:space])
+    if @space.save
+      redirect_to :root, notice: "スペース情報を更新しました。"
+    else
+      render "edit"
+    end
+  end
+
+  def destroy
+    @space = current_owner.spaces.find(params[:id])
+    @space.destroy
+    redirect_to :root, notice: "スペースを削除しました。"
+  end
+
+  def public_available
+    @space = Space.find(params[:id])
+    @space.update(available: true)
+    redirect_to request.referer, notice: "スペースを公開しました。"
+  end
+  def private_available
+    @space = Space.find(params[:id])
+    @space.update(available: false)
+    redirect_to request.referer, notice: "スペースを非公開にしました。"
+  end
+
+
 end

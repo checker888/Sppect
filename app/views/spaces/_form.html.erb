@@ -12,11 +12,11 @@
     </tr>
     <tr>
       <th>ジャンル<th>
-      <td><%=form.collection_radio_buttons :genres, Genre.all, :id, :name %></td>
+      <td><%=form.collection_radio_buttons :genre_ids, Genre.all, :id, :name ,{checked: Genre.first.id} %></td>
     </tr>
     <tr>
       <th>設備<th>
-      <td><%= form.collection_check_boxes :facilities, Facility.all, :id, :name %></td>
+      <td><%= form.collection_check_boxes :facility_ids, Facility.all, :id, :name %></td>
     </tr>
     
   <tr>
@@ -38,12 +38,12 @@
     <tr>
     <th>支払い方法</th>
     <td>
+        <%= form.radio_button :payment, 1 ,checked: true %>
      現金のみ
-      <%= form.radio_button :payment, 1 %>
-      クレジットカードのみ
       <%= form.radio_button :payment, 2 %>
+      クレジットカードのみ
+      <%= form.radio_button :payment, 3 %>
       現金・クレジットカード
-       <%= form.radio_button :payment, 3 %>
     </td>
   </tr>
   <%= form.hidden_field :average, value:0 %>

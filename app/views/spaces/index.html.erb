@@ -1,10 +1,21 @@
 <% @page_title = @owner ? @owner.name + "さんのスペース一覧" : "スペース一覧" %>
 <h1><%= @page_title %></h1>
-
+<%= form_with url: search_spaces_path, method: :get do |form|%>
+  <%= form.collection_check_boxes :genre_ids, Genre.all, :id, :name%>
+  <%= form.collection_check_boxes :facility_ids, Facility.all, :id, :name %>
+  <%= form.text_field :q %>
+  <%= form.submit  "検索"%>
+<% end %>
 
 <% if @spaces.present? %>
   <% @spaces.each do |space| %>
-    <h2><%= space.title %></h2>
+    <h2><%= space.title %>
+    <% if !space.approval %>
+    (承認待ち)
+    <%elsif !space.available%>
+    (公開停止中)
+    <% end %>
+    </h2>
     <p><%= truncate(space.subtitle, length: 80) %>
     <%= link_to "詳細を見る", space %></p>
 
@@ -12,5 +23,5 @@
   <% end %>
   <%= paginate @spaces%>
 <% else %>
-  <p>記事がありません。</p>
+  <p>スペースが存在しません。</p>
 <% end %>
