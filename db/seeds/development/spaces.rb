@@ -10,9 +10,11 @@ sub =
 %w(owner1 owner2 owner3 owner4 owner5).each do |name|
   owner = Owner.find_by!(name: name)
   genre = Genre.where(id: idx+1)
-  Space.create(
+  facility = Facility.where(id: idx+1)
+  space = Space.new(
     owner: owner,
     genres: genre,
+    facilities: facility,
     title: "スペース#{idx + 1}",
     subtitle: sub,
     price: 2500,
@@ -25,6 +27,11 @@ sub =
     available: idx.even?,
     payment: 1
   )
+  if space.save
+    # puts "Created Owner: #{owner.name}"
+  else
+    puts "Failed to create space: #{space.errors.full_messages}"
+  end
   idx += 1
 end
 

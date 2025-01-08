@@ -1,11 +1,15 @@
 class SpacesController < ApplicationController
+  def search
+    @spaces = Space.search(params[:q],params[:sex]).page(params[:page]).per(15)
+    render "index"
+  end
 
   def index
     if params[:owner_id]
       @owner = Owner.find(params[:owner_id])
       @spaces = @owner.spaces
     else
-      @spaces = Space.all
+      @spaces = Space.where(approval: true)
     end
     @spaces = @spaces.order(posted_at: :desc).page(params[:page]).per(3)
   end
@@ -41,5 +45,20 @@ class SpacesController < ApplicationController
       @user = current_user
     end
     @spaces = @user.liked_spaces.order("likes.created_at DESC").page(params[:page]).per(15)
+  end
+
+  def new
+    @space = Space.new()
+  end
+
+  def create
+    @space = Space.new(params[:space])
+    @space.owner = current_owner
+    if @space.save
+      redirect_to :root, notice: "スペース貸出を申請しました。"
+      # redirect_to reservations, notice: "予約を作成しました。"
+    else
+      render "new"
+    end
   end
 end

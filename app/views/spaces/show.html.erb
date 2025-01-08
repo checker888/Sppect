@@ -1,6 +1,13 @@
 <% @page_title = @space.title + " - " + @space.owner.name + "さんのスペース" %>
 <h1><%= @space.owner.name %>さんのスペース</h1>
 <h2><%= @space.title %></h2>
+<% if @space.owner == current_owner %>
+    <%= link_to "登録情報を編集する", edit_owner_space_path(current_owner) %></p>
+<%end%>
+<p><%=@space.available_start_time.strftime( "%H:%M" )%> ~ <%=@space.available_end_time.strftime( "%H:%M" )%></p>
+
+
+
 <%= link_to "予約する", new_space_reservation_path(@space) %></p>
 <% if @genres.present? %>
   <% @genres.each do |genre| %>
@@ -13,16 +20,5 @@
 <h2>レビュー</h2>
 <%=render "reviews"%>
 
-<% if @reviews.present? %>
-  <% @reviews.each do |review| %>
-    <h2><%= "#{review.user.name} ☆#{review.rating}  -#{review.posted_at}"%></h2>
-    <p><%= review.comment%></p>
-
-    
-  <% end %>
-  <%= paginate @reviews%>
-<% else %>
-  <p>レビューがありません。</p>
-<% end %>
 
 

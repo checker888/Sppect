@@ -9,4 +9,16 @@
   <% else%>
 
   <% end %>
+
+<% if @reviews.present? %>
+  <% @reviews.each do |review| %>
+    <h2><%= "#{review.user.name} ☆#{review.rating}  -#{review.posted_at}"%></h2>
+    <p><%= review.comment%></p>
+
+    
+  <% end %>
+  <%= paginate @reviews%>
+<% else %>
+  <p>レビューがありません。</p>
+<% end %>
   </div>

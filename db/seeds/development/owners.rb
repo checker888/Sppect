@@ -10,7 +10,7 @@ names = %w(owner1 owner2 owner3 owner4 owner5)
     password_confirmation: "sppect"
   )
   if owner.save
-    puts "Created Owner: #{owner.name}"
+    # puts "Created Owner: #{owner.name}"
   else
     puts "Failed to create Owner: #{owner.errors.full_messages}"
   end

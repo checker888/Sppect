@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resources :reviews
     patch "like","unlike",on: :member #ここはmemberでいい
     get "liked",on: :collection
+    get "search", on: :collection
   end
   # resources :reservations,except:[:destroy]
   resources :owners do
