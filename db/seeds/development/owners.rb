@@ -1,6 +1,6 @@
-names = %w(Owner1 Owner2 Owner3 Owner4 Owner5)
+names = %w(owner1 owner2 owner3 owner4 owner5)
 0.upto(4) do |idx|
-  Owner.create(
+  owner = Owner.new(
     name: names[idx],
     address: "3-3-#{idx}",
     phonenumber: "0120-666-554#{idx}",
@@ -9,6 +9,11 @@ names = %w(Owner1 Owner2 Owner3 Owner4 Owner5)
     password: "sppect",
     password_confirmation: "sppect"
   )
+  if owner.save
+    puts "Created Owner: #{owner.name}"
+  else
+    puts "Failed to create Owner: #{owner.errors.full_messages}"
+  end
 end
 
 

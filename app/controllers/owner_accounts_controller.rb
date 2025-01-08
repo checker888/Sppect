@@ -33,4 +33,5 @@ class OwnerAccountsController < ApplicationController
       render "edit"
     end
   end
+
 end

@@ -1,5 +1,5 @@
 idx = 0
-categories = Category.all
+# genres = Genre.all
 sub =
   "今晩は久しぶりに神宮で野球観戦。内野B席の上段に着席。 \n\n" +
   "先発はヤクルトがブキャナン、広島はジョンソン。" +
@@ -7,13 +7,12 @@ sub =
   "そして、８回裏には代打・荒木選手がレフトスタンドへ２号満塁ホームラン。\n\n" +
   "ブキャナン投手の今季初完封を見届けて、気分良く家路に着きました。"
 
-%w(Owner1 Owner2 Owner3 Owner4 Owner5).each do |name|
+%w(owner1 owner2 owner3 owner4 owner5).each do |name|
   owner = Owner.find_by!(name: name)
-  # category = categories[idx % categories.size]
-  category = categories
+  genre = Genre.where(id: idx+1)
   Space.create(
-    owner: owner,  # アソシエーションを使用
-    categories: category,  # アソシエーションを使用
+    owner: owner,
+    genres: genre,
     title: "スペース#{idx + 1}",
     subtitle: sub,
     price: 2500,

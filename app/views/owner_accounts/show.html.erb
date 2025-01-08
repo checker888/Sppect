@@ -2,4 +2,6 @@
 <div class="toolbar">
     <%= menu_link_to "オーナー情報の編集", :edit_owner_account%> 
     <%= link_to "貸出中のスペース一覧", owner_spaces_path(@owner)%> 
+    <%= link_to "退会", @owner, method: :delete,
+              data: { confirm: "本当に退会しますか?" } %>
 </div>

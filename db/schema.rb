@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_01_04_044504) do
+ActiveRecord::Schema[7.0].define(version: 2025_01_07_084812) do
   create_table "admins", force: :cascade do |t|
     t.string "name", null: false
     t.string "password_digest"
@@ -18,9 +18,14 @@ ActiveRecord::Schema[7.0].define(version: 2025_01_04_044504) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "categories", force: :cascade do |t|
-    t.string "genre"
-    t.string "facility"
+  create_table "facilities", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "genres", force: :cascade do |t|
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -69,18 +74,26 @@ ActiveRecord::Schema[7.0].define(version: 2025_01_04_044504) do
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
-  create_table "space_category_relations", force: :cascade do |t|
+  create_table "space_facility_relations", force: :cascade do |t|
     t.integer "space_id"
-    t.integer "category_id"
+    t.integer "facility_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["category_id"], name: "index_space_category_relations_on_category_id"
-    t.index ["space_id"], name: "index_space_category_relations_on_space_id"
+    t.index ["facility_id"], name: "index_space_facility_relations_on_facility_id"
+    t.index ["space_id"], name: "index_space_facility_relations_on_space_id"
+  end
+
+  create_table "space_genre_relations", force: :cascade do |t|
+    t.integer "space_id"
+    t.integer "genre_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["genre_id"], name: "index_space_genre_relations_on_genre_id"
+    t.index ["space_id"], name: "index_space_genre_relations_on_space_id"
   end
 
   create_table "spaces", force: :cascade do |t|
     t.integer "owner_id"
-    t.integer "category_id"
     t.string "title", null: false
     t.string "subtitle"
     t.integer "price", null: false
@@ -94,7 +107,6 @@ ActiveRecord::Schema[7.0].define(version: 2025_01_04_044504) do
     t.integer "payment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["category_id"], name: "index_spaces_on_category_id"
     t.index ["owner_id"], name: "index_spaces_on_owner_id"
   end
 
@@ -109,4 +121,8 @@ ActiveRecord::Schema[7.0].define(version: 2025_01_04_044504) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "space_facility_relations", "facilities"
+  add_foreign_key "space_facility_relations", "spaces"
+  add_foreign_key "space_genre_relations", "genres"
+  add_foreign_key "space_genre_relations", "spaces"
 end

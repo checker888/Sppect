@@ -1,0 +1,7 @@
+ja:
+  activerecord:
+    errors:
+      messages:
+        wrong: "が間違っています"
+        invalid_image_type: "must be an image in JPEG, PNG, GIF, or BMP format"
+        invalid_user_name: "は半角英数字で入力してください。"

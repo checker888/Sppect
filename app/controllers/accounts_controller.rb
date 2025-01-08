@@ -33,9 +33,5 @@ class AccountsController < ApplicationController
       render "edit"
     end
   end
-  def destroy
-    @user = User.find(params[:id])
-    @user.destroy
-    redirect_to :users, notice: "会員を削除しました。"
-  end
+
 end

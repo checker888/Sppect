@@ -1,0 +1,12 @@
+<div class="review">
+<% if current_user && current_user.review_writable_for?(@space) %>
+    <%= link_to "レビューを投稿する", new_space_review_path(@space) %></p>
+  <% elsif current_user && !current_user.review_writable_for?(@space)%>
+    <p>あなたのレビュー:<%=@review.comment%></p>
+    <%= link_to "レビューを編集する", edit_space_review_path(@space) %></p>
+    <%= link_to "削除", [@space,@review], method: :delete,
+              data: { confirm: "本当に削除しますか?" } %>
+  <% else%>
+
+  <% end %>
+  </div>

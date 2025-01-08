@@ -13,8 +13,11 @@ class SpacesController < ApplicationController
   # 記事詳細
   def show
     @space = Space.find(params[:id])
+    @genres = @space.genres
     @reviews = @space.reviews
-
+    if current_user && !current_user.review_writable_for?(@space)
+      @review = current_user.reviews.find_by(space: @space)
+    end
     @reviews = @reviews.order(posted_at: :desc).page(params[:page]).per(3)
   end
 
@@ -28,7 +31,7 @@ class SpacesController < ApplicationController
     @space = Space.find(params[:id])
     current_user.liked_spaces.destroy(Space.find(params[:id]))
     # redirect_to :liked_spaces,notice: "削除しました。"
-    redirect_to @space,notice: "¥お気に入りを取り消しました。"
+    redirect_to @space,notice: "お気に入りを取り消しました。"
   end
 
   def liked
