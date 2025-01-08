@@ -1,6 +1,12 @@
 class SpacesController < ApplicationController
   def search
-    @spaces = Space.search(params[:q]).where(approval: true,available: true).page(params[:page]).per(3)
+    if params[:owner_id]
+      @owner = Owner.find(params[:owner_id])
+      @spaces = @owner.spaces.page(params[:page]).per(3)
+    else
+      @spaces = Space.where(approval: true,available: true).page(params[:page]).per(3)
+    end
+    @spaces = @spaces.search(params[:q])
     @genre_ids = params[:genre_ids]&.select(&:present?)
     if @genre_ids.present?
       @genre_word = "ジャンル："

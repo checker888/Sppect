@@ -1,11 +1,22 @@
 <% @page_title = @owner ? @owner.name + "さんのスペース一覧" : "スペース一覧" %>
 <h1><%= @page_title %></h1>
+<%if @owner.present?%>
+<%= form_with url: search_owner_spaces_path, method: :get do |form|%>
+  <%= form.collection_check_boxes :genre_ids, Genre.all, :id, :name%>
+  <%= form.collection_check_boxes :facility_ids, Facility.all, :id, :name %>
+  <%= form.text_field :q %>
+  <%= form.submit  "検索"%>
+  <%end%>
+<%else %>
 <%= form_with url: search_spaces_path, method: :get do |form|%>
   <%= form.collection_check_boxes :genre_ids, Genre.all, :id, :name%>
   <%= form.collection_check_boxes :facility_ids, Facility.all, :id, :name %>
   <%= form.text_field :q %>
   <%= form.submit  "検索"%>
+  <%end%>
 <% end %>
+
+
 
 <% if @spaces.present? %>
   <% @spaces.each do |space| %>

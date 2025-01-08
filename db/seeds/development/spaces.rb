@@ -1,7 +1,7 @@
 idx = 0
 # genres = Genre.all
 sub =
-  "最高のオーナーが運営する最高の部屋 \n\n" 
+  "最高のオーナーが運営する最高のスペースはここ \n\n" 
   
   
   
@@ -35,3 +35,32 @@ sub =
   idx += 1
 end
 
+
+
+
+
+0.upto(2) do |idx2|
+  genre = Genre.where(id: idx2+1)
+  facility = Facility.where(id: [idx2+1,idx2+2])
+  space = Space.new(
+    owner: Owner.find_by!(name: "owner1"),
+    genres: genre,
+    facilities: facility,
+    title: "すごい部屋#{idx2 + 1}",
+    subtitle: sub,
+    price: 2500,
+    capacity: 20,
+    available_start_time: Time.zone.local(2024, 12, 20, 10, 0),
+    available_end_time: Time.zone.local(2024, 12, 20, 19, 0),
+    detail: "OOに適した設備が整っています。",
+    average: 0,
+    approval: idx2.even?,
+    available: idx2.even?,
+    payment: 1
+  )
+  if space.save
+    # puts "Created Owner: #{owner.name}"
+  else
+    puts "Failed to create space: #{space.errors.full_messages}"
+  end
+end

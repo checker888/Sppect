@@ -16,7 +16,10 @@ Rails.application.routes.draw do
   end
   # resources :reservations,except:[:destroy]
   resources :owners do
-    resources :spaces
+    resources :spaces do
+      get "search", on: :collection
+    end
+
   end
   resources :users do
     resources :reservations
