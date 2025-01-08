@@ -104,8 +104,16 @@ class SpacesController < ApplicationController
 
   def destroy
     @space = current_owner.spaces.find(params[:id])
-    @space.destroy
+    @reservations = @space.reservations.where(status: 0)
+    if @reservations.present?
+      flash[:notice] = "予約が残っているスペースは削除できません"
+      render "show"
+    else
+      @space.destroy
     redirect_to :root, notice: "スペースを削除しました。"
+    end
+    
+    
   end
 
   def public_available
