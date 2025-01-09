@@ -20,4 +20,27 @@ class ReservationsController < ApplicationController
     end
   end
 
+  def edit
+    @space = Space.find(params[:space_id])
+    @reservation = current_user.reservations.find_by(space: @space)
+   
+  end
+
+  def update
+    @space = Space.find(params[:space_id])
+    @reservation = current_user.reservations.find_by(space: @space)
+    @reservation.assign_attributes(params[:reservation])
+    if @reservation.save
+      redirect_to :root, notice: "予約内容を更新しました。"
+    else
+      render "edit"
+    end
+  end
+
+  def destroy
+    @space = Space.find(params[:space_id])
+    @reservation = current_user.reservations.find_by(space: @space)
+    @reservation.destroy
+    redirect_to :root, notice: "予約を削除しました。"
+  end
 end

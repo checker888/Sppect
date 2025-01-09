@@ -28,8 +28,10 @@
 <p><%=@space.available_start_time.strftime( "%H:%M" )%> ~ <%=@space.available_end_time.strftime( "%H:%M" )%></p>
 
 
-
+<%if current_user%>
 <p><%= link_to "予約する", new_space_reservation_path(@space) %></p>
+<%end%>
+
 <% if @genres.present? %>
 <p>
   <% @genres.each do |genre| %>

@@ -1,0 +1,2 @@
+class AdminAccountsController < ApplicationController
+end

@@ -11,6 +11,7 @@
 <%= form_with url: search_spaces_path, method: :get do |form|%>
   <%= form.collection_check_boxes :genre_ids, Genre.all, :id, :name%>
   <%= form.collection_check_boxes :facility_ids, Facility.all, :id, :name %>
+  <%= form.time_select :available_start_time,:default =>{:hour => '0',:minute => '0'}%>~<%= form.time_select :available_end_time, :default  =>{:hour => '23',:minute => '59'}%>
   <%= form.text_field :q %>
   <%= form.submit  "検索"%>
   <%end%>

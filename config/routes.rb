@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
   get 'login/index'
+  get 'admin_login/index'
   root "spaces#index"
   resource :account
   resource :owner_account
   resource :session, only:[:create,:destroy]
   resource :owner_session, only:[:create,:destroy]
   resources :spaces do
-    resources :reservations,except:[:destroy]
+    resources :reservations
     resources :reviews
     patch "like","unlike",on: :member #ここはmemberでいい
     get "liked",on: :collection
@@ -28,4 +29,13 @@ Rails.application.routes.draw do
       get "liked", on: :collection
     end
   end
+
+  resources :reservations
+  resource :admin_account
+  resource :admin_session, only:[:create,:destroy]
+  resource :admin
+  resources :admins do
+    get 'login/index'
+  end
+
 end

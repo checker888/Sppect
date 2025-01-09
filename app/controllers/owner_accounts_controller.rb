@@ -1,5 +1,5 @@
 class OwnerAccountsController < ApplicationController
-  before_action :login_required , except:[:new,:create]
+  before_action :owner_login_required , except:[:new,:create]
 
 
   def new

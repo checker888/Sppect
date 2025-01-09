@@ -19,11 +19,22 @@ class Space < ApplicationRecord
 
 
   class << self
-    def search(query)
+    def search(query,start_time, end_time)
       rel = order("id")
       if query.present?
         rel = rel.where("title LIKE ? OR subtitle LIKE ? OR detail LIKE ?",
           "%#{query}%", "%#{query}%", "%#{query}%")
+      end
+      # 時間範囲で絞り込み
+      if start_time.present? && end_time.present?
+        rel = rel.where(
+          "(available_start_time <= ? AND available_end_time >= ?) OR " +
+          "(available_start_time > available_end_time AND " +
+          "(? >= available_start_time OR ? <= available_end_time))",
+          start_time, end_time, start_time, end_time
+        )
+      else
+        # puts rel
       end
       rel
     end
