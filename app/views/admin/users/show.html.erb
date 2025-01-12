@@ -1,0 +1,26 @@
+<% @page_title = @user.name %>
+<div class="toolbar">
+    <%= menu_link_to "ユーザ情報の編集", :edit_admin_user%> 
+    <%= link_to "削除",[:admin, @user], method: :delete,
+              data: { confirm: "本当に削除しますか?" } %> 
+</div>
+<h2>ユーザー：<%=@user.name%></h2>
+<table class="attr">
+  <tr>
+    <th>誕生日</th>
+    <td><%= @user.birthday %></td>
+  </tr>
+    <tr>
+    <th>住所</th>
+    <td><%= @user.address %></td>
+  </tr>
+  <tr>
+    <th>電話番号</th>
+    <td><%= @user.phonenumber %></td>
+  </tr>
+
+  <tr>
+    <th>メールアドレス</th>
+    <td><%= @user.email %></td>
+  </tr>
+</table>

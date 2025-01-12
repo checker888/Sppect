@@ -1,13 +1,16 @@
 <% @page_title = @space.title + " - " + @space.owner.name + "さんのスペース" %>
 <h1>
     <%= @space.owner.name %>さんのスペース    
-    <% if !@space.approval %>
-    (承認待ち)
-    <%elsif !@space.available%>
-    (公開停止中)
-    <%else %>
-    (公開中)
-    <% end %>
+    <%if current_owner%>
+        <% if !@space.approval %>
+        (承認待ち)
+        <%elsif !@space.available%>
+        (公開停止中)
+     <%else %>
+     (公開中)
+     <% end %>
+    <%end%>
+
 </h1>
 <h2><%= @space.title %></h2>
 <% if @space.owner == current_owner %>

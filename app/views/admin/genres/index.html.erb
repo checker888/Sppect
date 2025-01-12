@@ -1,0 +1,12 @@
+ <%= link_to "ジャンルを追加", new_admin_genre_path %></p>
+<% if @genres.present? %>
+  <% @genres.each do |genre| %>
+    <h2><%= genre.name %></h2>
+     <%= link_to "削除", [:admin,genre], method: :delete,
+              data: { confirm: "本当に削除しますか?" } %>
+    
+  <% end %>
+  <%= paginate @genres%>
+<% else %>
+  <p>ジャンルが存在しません。</p>
+<% end %>

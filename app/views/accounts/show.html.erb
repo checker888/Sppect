@@ -1,8 +1,21 @@
 <% @page_title = @user.name %>
-<div class="toolbar">
-    <%= menu_link_to "ユーザ情報の編集", :edit_account%> 
-    <%= link_to "予約したスペース一覧", user_reservations_path(@user)%>
-    <%= link_to "お気に入りスペース一覧", liked_user_spaces_path(@user)%> 
-    <%= link_to "退会", @user, method: :delete,
-              data: { confirm: "本当に退会しますか?" } %> 
-</div>
+<h2>ユーザー：<%=@user.name%></h2>
+<table class="attr">
+  <tr>
+    <th>誕生日</th>
+    <td><%= @user.birthday %></td>
+  </tr>
+    <tr>
+    <th>住所</th>
+    <td><%= @user.address %></td>
+  </tr>
+  <tr>
+    <th>電話番号</th>
+    <td><%= @user.phonenumber %></td>
+  </tr>
+
+  <tr>
+    <th>メールアドレス</th>
+    <td><%= @user.email %></td>
+  </tr>
+</table>

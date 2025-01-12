@@ -29,7 +29,7 @@ class ReviewsController < ApplicationController
     @review = current_user.reviews.find_by(space: @space)
     @review.assign_attributes(params[:review])
     if @review.save
-      redirect_to :root, notice: "レビューを更新しました。"
+      redirect_to @space, notice: "レビューを更新しました。"
     else
       render "edit"
     end

@@ -1,0 +1,14 @@
+ <%= link_to "管理者を追加", new_admin_admin_path %></p>
+<% if @admins.present? %>
+  <% @admins.each do |admin| %>
+    <h2><%= admin.name %></h2>
+   
+    <%= link_to "編集", [:edit, :admin,admin] %></p>
+     <%= link_to "削除", [:admin,admin], method: :delete,
+              data: { confirm: "本当に削除しますか?" } %>
+    
+  <% end %>
+  <%= paginate @admins%>
+<% else %>
+  <p>管理者が存在しません。</p>
+<% end %>

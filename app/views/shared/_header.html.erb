@@ -1,20 +1,35 @@
 <%= image_tag "logo.gif", size: "272x48", alt: "Morning Glory" %>
+<%if controller.kind_of?(Admin::Base)%>
+  <%if current_admin %>
+      <%= menu_link_to current_admin.name + "さん", [:admin,:admin_account]%>
+    <%= menu_link_to "ログアウト", :admin_session,
+          method: :delete, data: { confirm: "ログアウトしますか？" } %>
+    <%=render "shared/admin_menubar"%>
+  <%end%>
 
+  
+<%else%>
 <% if current_user %>
   <ul class="account-menu">
     <%= menu_link_to current_user.name + "さん", :account%>
     <%= menu_link_to "ログアウト", :session,
           method: :delete, data: { confirm: "ログアウトしますか？" } %>
   </ul>
+  <%=render "shared/user_menubar"%>
 <%elsif current_owner %>
   <ul class="account-menu">
     <%= menu_link_to current_owner.name + "さん", :owner_account%>
     <%= menu_link_to "ログアウト", :owner_session,
           method: :delete, data: { confirm: "ログアウトしますか？" } %>
   </ul>
+  <%=render "shared/owner_menubar"%>
 <%else%>
 <%= menu_link_to "新規登録/ログイン", login_index_path%>
 <% end %>
+
+
+<%end%>
+
 
 
 

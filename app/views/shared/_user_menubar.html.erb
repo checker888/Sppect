@@ -1,0 +1,10 @@
+ <nav class="menubar">
+    <ul>
+    <%= menu_link_to "TOP", :root%> 
+    <%= menu_link_to "ユーザ情報の編集", :edit_account%> 
+    <%= menu_link_to "予約したスペース一覧", user_reservations_path(current_user)%>
+    <%= menu_link_to "お気に入りスペース一覧", liked_user_spaces_path(current_user)%> 
+    <%= menu_link_to "退会", current_user, method: :delete,
+              data: { confirm: "本当に退会しますか?" } %> 
+    </ul>
+</nav>

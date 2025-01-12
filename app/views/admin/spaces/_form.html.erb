@@ -1,0 +1,53 @@
+<%= render "shared/errors", obj: @space %>
+
+<table class="attr">
+     <tr>
+    <th>タイトル</th>
+    <td><%= form.text_field :title%></td>
+  </tr>
+    <tr>
+    <th>サブタイトル</th>
+    <td><%= form.text_field :subtitle%></td>
+  </tr>
+    </tr>
+    <tr>
+      <th>ジャンル<th>
+      <td><%=form.collection_radio_buttons :genre_ids, Genre.all, :id, :name ,{checked: Genre.first.id} %></td>
+    </tr>
+    <tr>
+      <th>設備<th>
+      <td><%= form.collection_check_boxes :facility_ids, Facility.all, :id, :name %></td>
+    </tr>
+    
+  <tr>
+    <th>価格(1時間あたり)</th>
+    <td><%= form.number_field :price%></td>
+  </tr>
+  <tr>
+    <th>最大利用人数</th>
+    <td><%= form.number_field :capacity%></td>
+  </tr>
+  <tr>
+      <th>利用可能時間</th>
+    <td><%= form.time_select :available_start_time%> から <%= form.time_select :available_end_time%> まで</td>
+  </tr>
+    <tr>
+    <th>スペース詳細情報</th>
+    <td><%= form.text_field :detail%></td>
+  </tr>
+    <tr>
+    <th>支払い方法</th>
+    <td>
+        <%= form.radio_button :payment, 1 ,checked: true %>
+     現金のみ
+      <%= form.radio_button :payment, 2 %>
+      クレジットカードのみ
+      <%= form.radio_button :payment, 3 %>
+      現金・クレジットカード
+    </td>
+  </tr>
+  <%= form.hidden_field :average, value:0 %>
+  <%= form.hidden_field :approval, value:false %>
+  <%= form.hidden_field :available, value:true %>
+
+</table>

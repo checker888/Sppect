@@ -1,0 +1,11 @@
+<nav class="menubar">
+    <ul>
+    <%= menu_link_to "TOP", admin_spaces_path%> 
+    <%= menu_link_to "管理者一覧", admin_admins_path%> 
+    <%= menu_link_to "ユーザー一覧", admin_users_path%>
+    <%= menu_link_to "オーナー一覧", admin_owners_path  %>
+    <%= menu_link_to "承認待ちスペース一覧", awaiting_approval_admin_spaces_path  %>
+    <%= menu_link_to "ジャンル一覧", admin_genres_path  %>
+    <%= menu_link_to "設備一覧", admin_facilities_path%>  
+    </ul>
+</nav>

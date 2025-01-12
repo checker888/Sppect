@@ -1,0 +1,59 @@
+<% @page_title = @space.title + " - " + @space.owner.name + "さんのスペース" %>
+<h1>
+    <%= @space.owner.name %>さんのスペース    
+    <% if !@space.approval %>
+    (承認待ち)
+    <%elsif !@space.available%>
+    (公開停止中)
+    <%else %>
+    (公開中)
+    <% end %>
+</h1>
+<h2><%= @space.title %></h2>
+    
+    <% if @space.available%>
+        <%= link_to "スペースの公開を停止する", [:private_available, :admin,@space],
+        method: :patch, class: "button",
+        data: { confirm: "スペースの公開を停止しますか?" }%>
+    <% elsif%>
+        <%= link_to "スペースを公開する", [:public_available, :admin,@space],
+        method: :patch, class: "button",
+        data: { confirm: "スペースを公開しますか?" }%>
+    <%= link_to "スペースの削除", [:admin,@space.owner,@space], method: :delete,
+              data: { confirm: "本当に削除しますか?" } %>
+    <% end%>
+
+    <% if !@space.approval%>
+        <%= link_to "スペースを承認する", [:approve, :admin,@space],
+        method: :patch, class: "button",
+        data: { confirm: "スペースを承認しますか?" }%>
+    <%end%>
+   
+<p><%=@space.available_start_time.strftime( "%H:%M" )%> ~ <%=@space.available_end_time.strftime( "%H:%M" )%></p>
+
+<p>収容人数<%=@space.capacity%></p>
+
+
+<% if @genres.present? %>
+<p>
+  <% @genres.each do |genre| %>
+    <%=genre.name %>
+  <%end%>
+  </p>
+<%end%>
+<% if @facilities.present? %>
+<p>
+  <% @facilities.each do |facility| %>
+    <%=facility.name%>
+  <%end%>
+    </p>
+<%end%>
+<%=render "likes"%>
+<%= simple_format(@space.detail) %>
+
+
+<h2>レビュー</h2>
+<%=render "reviews"%>
+
+
+

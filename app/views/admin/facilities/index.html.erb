@@ -1,0 +1,12 @@
+ <%= link_to "設備を追加", new_admin_facility_path %></p>
+<% if @facilities.present? %>
+  <% @facilities.each do |facility| %>
+    <h2><%= facility.name %></h2>
+     <%= link_to "削除", [:admin,facility], method: :delete,
+              data: { confirm: "本当に削除しますか?" } %>
+    
+  <% end %>
+  <%= paginate @facilities%>
+<% else %>
+  <p>設備が存在しません。</p>
+<% end %>

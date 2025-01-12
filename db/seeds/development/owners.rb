@@ -1,4 +1,4 @@
-names = %w(owner1 owner2 owner3 owner4 owner5)
+names = %w(taro owner2 owner3 owner4 owner5)
 0.upto(4) do |idx|
   owner = Owner.new(
     name: names[idx],

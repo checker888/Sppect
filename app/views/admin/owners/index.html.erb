@@ -1,0 +1,11 @@
+<% if @owners.present? %>
+  <% @owners.each do |owner| %>
+    <h2> <%= link_to "#{owner.id}:#{owner.name}", [:admin,owner] %><</h2>
+    
+
+    
+  <% end %>
+  <%= paginate @owners%>
+<% else %>
+  <p>ユーザーがいません。</p>
+<% end %>

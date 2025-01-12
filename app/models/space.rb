@@ -26,16 +26,16 @@ class Space < ApplicationRecord
           "%#{query}%", "%#{query}%", "%#{query}%")
       end
       # 時間範囲で絞り込み
-      if start_time.present? && end_time.present?
-        rel = rel.where(
-          "(available_start_time <= ? AND available_end_time >= ?) OR " +
-          "(available_start_time > available_end_time AND " +
-          "(? >= available_start_time OR ? <= available_end_time))",
-          start_time, end_time, start_time, end_time
-        )
-      else
-        # puts rel
-      end
+      # if start_time.present? && end_time.present?
+      #   rel = rel.where(
+      #     "(available_start_time <= ? AND available_end_time >= ?) OR " +
+      #     "(available_start_time > available_end_time AND " +
+      #     "(? >= available_start_time OR ? <= available_end_time))",
+      #     start_time, end_time, start_time, end_time
+      #   )
+      # else
+      #   # puts rel
+      # end
       rel
     end
 

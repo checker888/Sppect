@@ -1,0 +1,11 @@
+<% if @users.present? %>
+  <% @users.each do |user| %>
+    <h2> <%= link_to "#{user.id}:#{user.name}", [:admin,user] %><</h2>
+    
+
+    
+  <% end %>
+  <%= paginate @users%>
+<% else %>
+  <p>ユーザーがいません。</p>
+<% end %>

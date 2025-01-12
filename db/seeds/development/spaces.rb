@@ -1,13 +1,13 @@
 idx = 0
 # genres = Genre.all
 sub =
-  "最高のオーナーが運営する最高のスペースはここ \n\n" 
+  "ここにサブタイトル \n\n" 
   
   
   
   
 
-%w(owner1 owner2 owner3 owner4 owner5).each do |name|
+%w(taro owner2 owner3 owner4 owner5).each do |name|
   owner = Owner.find_by!(name: name)
   genre = Genre.where(id: idx+1)
   facility = Facility.where(id: idx+1)
@@ -43,7 +43,7 @@ end
   genre = Genre.where(id: idx2+1)
   facility = Facility.where(id: [idx2+1,idx2+2])
   space = Space.new(
-    owner: Owner.find_by!(name: "owner1"),
+    owner: Owner.find_by!(name: "taro"),
     genres: genre,
     facilities: facility,
     title: "すごい部屋#{idx2 + 1}",

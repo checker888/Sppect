@@ -1,0 +1,25 @@
+<% @page_title = @owner.name %>
+<div class="toolbar">
+    <%= menu_link_to "オーナー情報の編集", :edit_admin_owner%> 
+    <%= link_to "削除", [:admin,@owner], method: :delete,
+              data: { confirm: "本当に削除しますか?" } %>
+</div>
+<h2>オーナー：<%=@owner.name%></h2>
+<table class="attr">
+  <tr>
+    <th>誕生日</th>
+    <td><%= @owner.birthday %></td>
+  </tr>
+    <tr>
+    <th>住所</th>
+    <td><%= @owner.address %></td>
+  </tr>
+  <tr>
+    <th>電話番号</th>
+    <td><%= @owner.phonenumber %></td>
+  </tr>
+
+  <tr>
+    <th>メールアドレス</th>
+    <td><%= @owner.email %></td>
+  </tr>

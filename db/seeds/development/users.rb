@@ -1,4 +1,4 @@
-names = %w(User1 User2 User3 User4 User5)
+names = %w(taro User2 User3 User4 User5)
 0.upto(4) do |idx|
   User.create(
     name: names[idx],

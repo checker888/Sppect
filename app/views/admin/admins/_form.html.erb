@@ -1,0 +1,16 @@
+<%= render "shared/errors", obj: @admin %>
+
+<table class="attr">
+  <tr>
+    <th>ユーザー名</th>
+    <td><%= form.text_field :name %></td>
+  </tr>
+  <tr>
+    
+  <% if @admin == current_admin  || @admin.new_record?%>
+    <tr>
+      <th>パスワード</th>
+      <td><%= form.text_field :password %></td>
+    </tr>
+  <% end %>
+</table>

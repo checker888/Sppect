@@ -55,13 +55,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  private def admin_login_required
-    if !current_admin
-      raise AdminLoginRequired
-    end
-  end
+ 
 
-  class AdminLoginRequired < StandardError; end
   class OwnerLoginRequired < StandardError; end
   class LoginRequired < StandardError; end
   class Forbidden < StandardError; end
@@ -79,16 +74,11 @@ class ApplicationController < ActionController::Base
     render "login/index", status: 403,
       formats: [:html]
   end
-  private def rescue_admin_login_required(exception)
-    render "admin_login/index", status: 403,
-      formats: [:html]
-  end
   private def rescue_forbidden(exception)
-    render "errors/forbidden", status: 403, layout: "error",
+    render "errors/forbidden", status: 403,
       formats: [:html]
   end
   rescue_from OwnerLoginRequired, with: :rescue_owner_login_required
-  rescue_from AdminLoginRequired, with: :rescue_admin_login_required
   rescue_from LoginRequired, with: :rescue_login_required
   rescue_from Forbidden, with: :rescue_forbidden
 end

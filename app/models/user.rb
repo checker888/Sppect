@@ -20,7 +20,7 @@ class User < ApplicationRecord
   length: { minimum: 10, maximum: 14, allow_blank: true },
   uniqueness: true
   validates :birthday, comparison: { less_than_or_equal_to: Date.today }
-  validates :email, email: { allow_blank: true }
+  validates :email, email: { allow_blank: true },presence: true, uniqueness: true
   attr_accessor :current_password
   validates :password, presence: {if: :current_password}
   
