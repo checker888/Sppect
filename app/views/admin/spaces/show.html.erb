@@ -29,9 +29,21 @@
         data: { confirm: "スペースを承認しますか?" }%>
     <%end%>
    
-<p><%=@space.available_start_time.strftime( "%H:%M" )%> ~ <%=@space.available_end_time.strftime( "%H:%M" )%></p>
+<p><%=@space.available_start_time.strftime( "%y年%m月%d日%H:%M" )%> ~ <%=@space.available_end_time.strftime("%y年%m月%d日%H:%M" )%></p>
 
-<p>収容人数<%=@space.capacity%></p>
+<p>予約可能時間：<%=@space.available_start_time.strftime( "%Y年%m月%d日%H:%M" )%> ~ <%=@space.available_end_time.strftime("%Y年%m月%d日%H:%M" )%></p>
+<p>1時間あたり料金：<%=@space.price%>円</p>
+<p>収容人数：<%=@space.capacity%>人</p>
+<p>支払い方法：
+    <%if @space.payment == 1%>
+        現金のみ
+    <%elsif @space.payment == 2%>
+        クレジットカードのみ
+    <%else%>
+        現金・クレジットカード
+    <%end%>
+    </p>
+
 
 
 <% if @genres.present? %>

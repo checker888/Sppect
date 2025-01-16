@@ -13,6 +13,7 @@
 
 </h1>
 <h2><%= @space.title %></h2>
+<h4><%= @space.subtitle %></h4>
 <% if @space.owner == current_owner %>
     <%= link_to "登録情報を編集する", edit_owner_space_path(current_owner) %>
     <% if @space.available%>
@@ -28,8 +29,18 @@
     <% end%>
     
 <%end%>
-<p><%=@space.available_start_time.strftime( "%H:%M" )%> ~ <%=@space.available_end_time.strftime( "%H:%M" )%></p>
-
+<p>予約可能時間：<%=@space.available_start_time.strftime( "%Y年%m月%d日%H:%M" )%> ~ <%=@space.available_end_time.strftime("%Y年%m月%d日%H:%M" )%></p>
+<p>1時間あたり料金：<%=@space.price%>円</p>
+<p>収容人数：<%=@space.capacity%>人</p>
+<p>支払い方法：
+    <%if @space.payment == 1%>
+        現金のみ
+    <%elsif @space.payment == 2%>
+        クレジットカードのみ
+    <%else%>
+        現金・クレジットカード
+    <%end%>
+    </p>
 
 <%if current_user%>
 <p><%= link_to "予約する", new_space_reservation_path(@space) %></p>

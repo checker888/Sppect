@@ -11,33 +11,27 @@ class Admin::SpacesController < Admin::Base
       else
         @spaces = Space.where(approval: true,available: true).page(params[:page]).per(3)
       end
+      syear =params["available_start_time(1i)"].to_i
+      smonth = params["available_start_time(2i)"].to_i
+      sday = params["available_start_time(3i)"].to_i
       shour = params["available_start_time(4i)"].to_i
       sminute = params["available_start_time(5i)"].to_i
       
+      eyear= params["available_end_time(1i)"].to_i
+      emonth= params["available_end_time(2i)"].to_i
+      eday = params["available_end_time(3i)"].to_i
       ehour = params["available_end_time(4i)"].to_i
       eminute = params["available_end_time(5i)"].to_i
-     @start_time = DateTime.new(2025,1,1,shour,sminute)
-     @end_time = DateTime.new(2025,1,1,ehour,eminute)
+     @start_time = DateTime.new(syear,smonth,sday,shour,sminute)
+     @end_time = DateTime.new(eyear,emonth,eday,ehour,eminute)
   
       # @spaces = @spaces.search(params[:q],params[:available_start_time],params[:available_end_time])
-      @spaces = @spaces.search(params[:q],@start_time,@end_time)
+     
       @genre_ids = params[:genre_ids]&.select(&:present?)
-      if @genre_ids.present?
-        @genre_word = "ジャンル："
-        @genre_ids.each do |id|
-          @genre_word = @genre_word + ' ' + Genre.find(id).name if id != ""
-        end
-        @spaces = @spaces.joins(:space_genre_relations).where(space_genre_relations: {genre_id: @genre_ids}).group("spaces.id").having("count(*) = #{@genre_ids.length}")
-      end
       @facility_ids = params[:facility_ids]&.select(&:present?)
-      if @facility_ids.present?
-        @facility_word = "設備："
-        @facility_ids.each do |id|
-          @gfacility_word = @facility_word + ' ' + Facility.find(id).name if id != ""
-        end
-        @spaces = @spaces.joins(:space_facility_relations).where(space_facility_relations: {facility_id: @facility_ids}).group("spaces.id").having("count(*) = #{@facility_ids.length}")
-      end
-      render "index"
+      @spaces = @spaces.search(params[:q],@start_time,@end_time,@genre_ids,@facility_ids)
+      @spaces = @spaces.where('available_end_time >= ? and ? >= available_start_time', @start_time, @end_time)
+
     end
 
 

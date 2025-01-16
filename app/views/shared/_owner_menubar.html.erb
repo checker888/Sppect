@@ -1,7 +1,7 @@
  <nav class="menubar">
     <ul>
     <%= menu_link_to "TOP", :root%> 
-    <%= menu_link_to "オーナー情報の編集", :edit_owner_account%>
+    
     <%= menu_link_to "貸出中のスペース一覧", owner_spaces_path(current_owner)%>
     <%= menu_link_to "新規スペース申請", new_owner_space_path(current_owner)%>
 

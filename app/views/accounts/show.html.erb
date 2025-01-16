@@ -19,6 +19,6 @@
     <td><%= @user.email %></td>
   </tr>
 </table>
-<h3><%= link_to "ログアウト", :session,
+<h3><%= link_to "ユーザ情報の編集", :edit_account%> | <%= link_to "ログアウト", :session,
           method: :delete, data: { confirm: "ログアウトしますか？" } %> | <%= link_to "退会", current_user, method: :delete,
               data: { confirm: "本当に退会しますか?" }  %> </h3>
