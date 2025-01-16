@@ -19,11 +19,20 @@ class Space < ApplicationRecord
 
 
   class << self
-    def search(query,start_time, end_time)
+    def search(query,start_time, end_time,genre_ids,facility_ids)
       rel = order("id")
       if query.present?
         rel = rel.where("title LIKE ? OR subtitle LIKE ? OR detail LIKE ?",
           "%#{query}%", "%#{query}%", "%#{query}%")
+      end
+      if genre_ids.present?
+        rel = rel.joins(:genres).where(space_genre_relations: {genre_id: genre_ids })
+      end
+
+      if facility_ids.present?
+        rel = rel.joins(:facilities).where(space_facility_relations: {facility_id: facility_ids })
+                    .group("spaces.id")  # 重複を避けるためスペースIDでグループ化
+                    .having("COUNT(facilities.id) = ?", facility_ids.size)
       end
       # 時間範囲で絞り込み
       # if start_time.present? && end_time.present?

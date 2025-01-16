@@ -1,6 +1,6 @@
 class Admin::UsersController < Admin::Base
 
-    before_action :admin_login_required , except:[:new,:create]
+  before_action :admin_login_required 
     def index
       @users = User.all.page(params[:page]).per(10)
     end

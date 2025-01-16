@@ -19,3 +19,8 @@
     <td><%= @owner.email %></td>
   </tr>
 </table>
+    <h3><%= menu_link_to current_owner.name + "さん", :owner_account%>
+    <%= menu_link_to "ログアウト", :owner_session,
+          method: :delete, data: { confirm: "ログアウトしますか？" } %>
+  | <%= menu_link_to "退会", current_owner, method: :delete,
+              data: { confirm: "本当に退会しますか?" } %></h3>

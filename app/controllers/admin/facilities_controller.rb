@@ -1,4 +1,5 @@
 class Admin::FacilitiesController < Admin::Base
+  before_action :admin_login_required 
   def index
     @facilities = Facility.all.page(params[:page]).per(10)
   end

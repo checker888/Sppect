@@ -31,8 +31,6 @@ Rails.application.routes.draw do
   end
 
   resources :reservations
-  resource :admin_account
-  resource :admin_session, only:[:create,:destroy]
 
   namespace :admin do
     get 'admins/index'

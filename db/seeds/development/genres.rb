@@ -1,4 +1,4 @@
-names = %w(会議室 自習室 マンション カジノ ゲームセンター キャンプ)
+names = %w(その他 会議室 自習室 マンション カジノ ゲームセンター キャンプ)
 0.upto(5) do |idx|
   genre = Genre.new(
     name: names[idx],

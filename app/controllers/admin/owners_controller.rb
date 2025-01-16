@@ -1,5 +1,5 @@
 class Admin::OwnersController < Admin::Base
-  before_action :admin_login_required , except:[:new,:create]
+  before_action :admin_login_required 
   def index
     @owners = Owner.all.page(params[:page]).per(10)
   end
