@@ -1,0 +1,324 @@
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background-color: #f8f9fa;
+    color: #333;
+    margin: 0;
+    padding: 0;
+  }
+  /* リンク */
+a:link { color: #00c; }
+a:visited { color: #00c; }
+a:hover { color: #f00; }
+a img { border: none; }
+  /* ナビゲーション */
+nav ul,
+ul.toolbar,
+ul.links {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li,
+div.toolbar li,
+ul.toolbar li,
+ul.links li {
+  display: inline;
+}
+
+/* 全体の枠 */
+div#container {
+  margin: 0 auto;
+  padding-top: 5px;
+  width: 780px;
+}
+/* メニューバー */
+nav.menubar {
+    padding: 2px;
+    background-color: #000;
+    color: #ccc;
+    font-size: 80%;
+    padding: 8px 16px;
+  }
+  
+  nav.menubar ul li:not(:last-child):after {
+    color: #ccc;
+    content: " | ";
+    margin: 0 2px;
+  }
+  
+  /* メニューバーのリンク */
+  nav.menubar a { text-decoration: none; }
+  
+  /* メニューバーのリンク（未訪問） */
+  nav.menubar a:link { color: #ccc; }
+  
+  /* メニューバーのリンク（訪問済） */
+  nav.menubar a:visited { color: #ccc; }
+  
+  /* メニューバーのリンク（マウスを合わせたとき） */
+  nav.menubar a:hover {
+    color: #f88;
+    text-decoration: underline;
+  }
+  
+  /* メニューバーのリンク（現在のページ） */
+  nav.menubar span {
+    color: #5585ee;
+    font-weight: bold;
+  }
+  
+  h1 {
+    font-size: 2rem;
+    color: #007bff;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+    color: #343a40;
+    margin: 0.5rem 0;
+  }
+  
+  p {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  form {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    background-color: #ffffff;
+  }
+  form label {
+    font-weight: bold;
+    margin-right: 0.5rem;
+  }
+  
+  form input[type="text"]{
+    padding: 0.2rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    width: 40%;
+    box-sizing: border-box;
+  }
+  form select {
+    padding: 0.1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    width: 8%;
+    box-sizing: border-box;
+  }
+  .form-container {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    background-color: #ffffff;
+  }
+  .f select {
+    padding: 0.1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    width: 18%;
+    box-sizing:content-box;
+  }
+  .uf select {
+    padding: 0.1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    width: 28%;
+    box-sizing:content-box;
+  }
+  .uf input[type="text"]{
+    padding: 0.2rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    width: 80%;
+    box-sizing: border-box;
+  }
+  form input[type="submit"] {
+    background-color: #28a745;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  form input[type="submit"]:hover {
+    background-color: #218838;
+  }
+  
+  form .collection_check_boxes {
+    margin-bottom: 1rem;
+  }
+  
+  form .collection_check_boxes label {
+    margin-right: 1rem;
+  }
+  
+  .spaces-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+  }
+  .space-container {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    background-color: #ffffff;
+  }
+  .space-card {
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 1rem;
+    background-color: #ffffff;
+    width: calc(66.666% - 2rem); /* 3列にする */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .space-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .space-card h2 {
+    font-size: 1.25rem;
+    color: #007bff;
+  }
+  
+  .space-card p {
+    font-size: 0.9rem;
+    color: #6c757d;
+  }
+  
+  .space-card a {
+    display: inline-block;
+    margin-top: 0.5rem;
+    text-decoration: none;
+    color: #ffffff;
+    background-color: #007bff;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+  }
+  
+  .space-card a:hover {
+    background-color: #0056b3;
+  }
+  .pagination {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+  }
+  
+  .pagination li {
+    margin: 0 0.5rem;
+  }
+  
+  .pagination a,
+  .pagination span {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    color: #007bff;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .pagination a:hover {
+    background-color: #007bff;
+    color: #ffffff;
+  }
+  
+  .empty-message {
+    text-align: center;
+    color: #6c757d;
+    font-size: 1.25rem;
+    padding: 2rem;
+    border: 1px dashed #ced4da;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+  }
+  .button {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem 0;
+    background-color: #a4a8db;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .like_button {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem 0;
+    background-color: #DDDD00;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .button:hover {
+    background-color: #2980b9;
+  }
+  
+  .button.danger {
+    background-color: #e74c3c;
+  }
+  
+  .button.danger:hover {
+    background-color: #c0392b;
+  }
+  
+
+  .space-detail {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .space-detail h1 {
+    margin-bottom: 1rem;
+  }
+  
+  .space-detail p {
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  .space-detail .price, .space-detail .capacity, .space-detail .payment {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  
+  .space-detail .genres, .space-detail .facilities {
+    margin: 1rem 0;
+    font-size: 0.9rem;
+    color: #777;
+  }
+  

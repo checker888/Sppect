@@ -9,7 +9,8 @@ class Admin::GenresController < Admin::Base
   
   def create
     @genre = Genre.new(params[:genre])
-    if @genre.save
+    gc = Genre.find_by(name: @genre.name)
+    if @genre.save && !gc.present?
       redirect_to request.referer, notice: "ジャンルを追加しました。"
       
     else

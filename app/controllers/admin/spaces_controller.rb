@@ -31,7 +31,7 @@ class Admin::SpacesController < Admin::Base
       @facility_ids = params[:facility_ids]&.select(&:present?)
       @spaces = @spaces.search(params[:q],@start_time,@end_time,@genre_ids,@facility_ids)
       @spaces = @spaces.where('available_end_time >= ? and ? >= available_start_time', @start_time, @end_time)
-
+      render "index"
     end
 
 
@@ -57,6 +57,13 @@ class Admin::SpacesController < Admin::Base
     if current_user && !current_user.review_writable_for?(@space)
       @review = current_user.reviews.find_by(space: @space)
     end
+    if @reviews.present?
+      ave = 0.0
+      @reviews.each do |review|
+        ave += review.rating
+      end
+      @space.average = ave/@reviews.count
+     end
     @reviews = @reviews.order(posted_at: :desc).page(params[:page]).per(3)
   end
 
@@ -104,12 +111,12 @@ class Admin::SpacesController < Admin::Base
 
   # def edit
   #   @owner = current_owner
-  #   @space = current_owner.spaces.find_by(owner: @owner)
+  #   @space = Space.find(params[:id])
   # end
 
   # def update
   #   @owner = current_owner
-  #   @space = current_owner.spaces.find_by(owner: @owner)
+  #   @space = Space.find(params[:id])
   #   @space.assign_attributes(params[:space])
   #   if @space.save
   #     redirect_to :root, notice: "スペース情報を更新しました。"

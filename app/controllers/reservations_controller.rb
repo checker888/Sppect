@@ -11,8 +11,11 @@ class ReservationsController < ApplicationController
   def create
     @reservation = Reservation.new(params[:reservation])
     @reservations = Reservation.where('space_id = ? and reserve_end_time > ? and ? > reserve_start_time', params[:space_id] ,@reservation.reserve_start_time, @reservation.reserve_end_time)
-    if @reservations.present?
+    if @reservations.present? 
       flash.notice = "その時間には既に予約が登録されています。"
+      render "new"
+    elsif  @reservation.reserve_start_time > @reservation.reserve_end_time
+      flash.notice = "正しい時間を入力してください。"
       render "new"
     else
       @reservation.user = current_user

@@ -1,6 +1,6 @@
 idx = 0
 
-%w(taro User2 User3 User4 User5).each do |name|
+%w(taro Jiro User User2 User3).each do |name|
   user = User.find_by!(name: name)
   space = Space.find_by!(title: "スペース1")
   # category = categories[idx % categories.size]

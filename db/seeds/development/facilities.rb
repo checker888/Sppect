@@ -1,4 +1,4 @@
-names = %w(トイレ Wifiあり 暖房 ユニットバス プロジェクターあり 火気使用可)
+names = %w(トイレ Wifiあり 暖房 ユニットバス プロジェクターあり 火気使用可 コンセント)
 0.upto(5) do |idx|
   facility = Facility.new(
     name: names[idx],

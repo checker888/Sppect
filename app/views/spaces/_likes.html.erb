@@ -1,10 +1,11 @@
 <div class="vote">
+    
   <% if current_user && current_user.votable_for?(@space) %>
     <%= link_to "☆お気に入り", [:like, @space],
-      method: :patch, class: "button" %>
+      method: :patch, class: "like_button" %>
   <% elsif current_user && !current_user.votable_for?(@space)%>
     <%= link_to "★お気に入り", [:unlike, @space], 
-    method: :patch, class: "button",
+    method: :patch, class: "like_button",
     data: { confirm: "お気に入りを取り消しますか?" } %>
   <% else%>
     ☆お気に入り

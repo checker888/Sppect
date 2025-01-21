@@ -7,5 +7,6 @@
     <%= menu_link_to "承認待ちスペース一覧", awaiting_approval_admin_spaces_path  %>
     <%= menu_link_to "ジャンル一覧", admin_genres_path  %>
     <%= menu_link_to "設備一覧", admin_facilities_path%>  
+    <%= menu_link_to current_admin.name , [:admin,:admin_account]%>
     </ul>
 </nav>

@@ -36,8 +36,12 @@ class ReviewsController < ApplicationController
   end
   def destroy
     @review = current_user.reviews.find(params[:id])
-    @review.destroy
-    redirect_to :root, notice: "レビューを削除しました。"
+    if @review.present?
+      @review.destroy
+      redirect_to :admin_root, notice: "レビューを削除しました。"
+    else
+      redirect_to :admin_root, notice: "レビューがすでに存在しません。"
+    end
   end
 
 

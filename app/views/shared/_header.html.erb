@@ -1,9 +1,8 @@
 <%= image_tag "sppect.jpg", size: "272x48", alt: "Sppect" %>
 <%if controller.kind_of?(Admin::Base)%>
   <%if current_admin %>
-      <%= menu_link_to current_admin.name + "さん", [:admin,:admin_account]%>
-    <%= menu_link_to "ログアウト", :admin_admin_session,
-          method: :delete, data: { confirm: "ログアウトしますか？" } %>
+      
+   
     <%=render "shared/admin_menubar"%>
   <%end%>
 

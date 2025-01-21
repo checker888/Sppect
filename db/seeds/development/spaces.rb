@@ -1,13 +1,13 @@
 idx = 0
 # genres = Genre.all
 sub =
-  "ここにサブタイトル \n\n" 
+  "〜快適な空間〜 \n\n" 
   
   
   
   
 
-%w(taro owner2 owner3 owner4 owner5).each do |name|
+%w(taro Jiro Owner Owner2 Owner3).each do |name|
   owner = Owner.find_by!(name: name)
   genre = Genre.where(id: idx+1)
   facility = Facility.where(id: idx+1)
@@ -21,7 +21,7 @@ sub =
     capacity: 20,
     available_start_time: Time.zone.local(2025, 1, 1, 10, 0),
     available_end_time: Time.zone.local(2025, 1, 1, 19, 0),
-    detail: "OOに適した設備が整っています。",
+    detail: "最新の設備が整っています。",
     average: 0,
     approval: true,
     available: true,
@@ -46,13 +46,13 @@ end
     owner: Owner.find_by!(name: "taro"),
     genres: genre,
     facilities: facility,
-    title: "すごい部屋#{idx2 + 1}",
+    title: "部屋#{idx2 + 1}",
     subtitle: sub,
-    price: 2500,
-    capacity: 20,
+    price: 1500,
+    capacity: 4,
     available_start_time: Time.zone.local(2025, 1, 9, 10, 0),
     available_end_time: Time.zone.local(2025, 1, 9, 19, 0),
-    detail: "OOに適した設備が整っています。",
+    detail: "まったりくつろげます。",
     average: 0,
     approval: idx2.even?,
     available: idx2.even?,

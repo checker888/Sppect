@@ -1,6 +1,6 @@
 <% @page_title = @space.title + " - " + @space.owner.name + "さんのスペース" %>
 <h1>
-    <%= @space.owner.name %>さんのスペース    
+    <%= @space.owner.name %>さんのスペース  評価：<%@space.average%>  
     <% if !@space.approval %>
     (承認待ち)
     <%elsif !@space.available%>
@@ -29,7 +29,7 @@
         data: { confirm: "スペースを承認しますか?" }%>
     <%end%>
    
-<p><%=@space.available_start_time.strftime( "%y年%m月%d日%H:%M" )%> ~ <%=@space.available_end_time.strftime("%y年%m月%d日%H:%M" )%></p>
+
 
 <p>予約可能時間：<%=@space.available_start_time.strftime( "%Y年%m月%d日%H:%M" )%> ~ <%=@space.available_end_time.strftime("%Y年%m月%d日%H:%M" )%></p>
 <p>1時間あたり料金：<%=@space.price%>円</p>
@@ -60,7 +60,6 @@
   <%end%>
     </p>
 <%end%>
-<%=render "likes"%>
 <%= simple_format(@space.detail) %>
 
 

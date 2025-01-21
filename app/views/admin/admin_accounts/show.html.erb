@@ -1,2 +1,4 @@
 <% @page_title = @admin.name %>
 <h2>管理者：<%=@admin.name%></h2>
+ <%= link_to "ログアウト", :admin_admin_session,
+          method: :delete, data: { confirm: "ログアウトしますか？" } %>

@@ -4,7 +4,7 @@
 
 <% if @reservations.present? %>
   <% @reservations.each do |reservation| %>
-    <h2><%= link_to "#{reservation.space.title}  #{reservation.reserve_start_time.strftime("%Y-%m-%d %H:%M")} ~ #{reservation.reserve_end_time.strftime("%H:%M")} ", reservation.space%></h2>
+    <h2><%= link_to "#{reservation.space.title}  #{reservation.reserve_start_time.strftime("%Y-%m-%d %H:%M")} ~ #{reservation.reserve_end_time.strftime("%Y-%m-%d %H:%M")} ", reservation.space%></h2>
 　　<%= link_to "予約内容を編集する", edit_space_reservation_path(reservation.space,reservation) %>
 <%= link_to "予約の削除", [reservation.space,reservation], method: :delete,
               data: { confirm: "本当に削除しますか?" } %>

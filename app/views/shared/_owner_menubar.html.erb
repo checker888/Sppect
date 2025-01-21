@@ -4,6 +4,6 @@
     
     <%= menu_link_to "貸出中のスペース一覧", owner_spaces_path(current_owner)%>
     <%= menu_link_to "新規スペース申請", new_owner_space_path(current_owner)%>
-
+    <%= menu_link_to current_owner.name, :owner_account%>
     </ul>
 </nav>

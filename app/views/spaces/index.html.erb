@@ -2,17 +2,21 @@
 <h1><%= @page_title %></h1>
 <%if @owner.present?%>
 <%= form_with url: search_owner_spaces_path, method: :get do |form|%>
-  <%= form.collection_check_boxes :genre_ids, Genre.all, :id, :name%>
-  <%= form.collection_check_boxes :facility_ids, Facility.all, :id, :name %>
-  <%= form.datetime_select :available_start_time,:default =>{:hour => '0',:minute => '0'}%>~<%= form.time_select :available_end_time, :default  =>{:hour => '23',:minute => '59'}%>
+ジャンル：<%= form.collection_check_boxes :genre_ids, Genre.all, :id, :name%>
+  <br>
+ 設備： <%= form.collection_check_boxes :facility_ids, Facility.all, :id, :name %>
+<br>
+  <%= form.datetime_select :available_start_time,:default =>{:year => '2020',:hour => '0',:minute => '0'}%>~<%= form.time_select :available_end_time, :default  =>{:hour => '23',:minute => '59'}%>
   <%= form.text_field :q %>
   <%= form.submit  "検索"%>
   <%end%>
 <%else %>
 <%= form_with url: search_spaces_path, method: :get do |form|%>
-  <%= form.collection_check_boxes :genre_ids, Genre.all, :id, :name%>
-  <%= form.collection_check_boxes :facility_ids, Facility.all, :id, :name %>
-  <%= form.datetime_select :available_start_time,:default =>{:hour => '0',:minute => '0'}%>~<%= form.datetime_select :available_end_time, :default  =>{:hour => '23',:minute => '59'}%>
+  ジャンル：<%= form.collection_check_boxes :genre_ids, Genre.all, :id, :name%>
+  <br>
+  設備：<%= form.collection_check_boxes :facility_ids, Facility.all, :id, :name %>
+  <br>
+  <%= form.datetime_select :available_start_time,:default =>{:year => '2020',:hour => '0',:minute => '0'}%>~<%= form.datetime_select :available_end_time, :default  =>{:hour => '23',:minute => '59'}%>
   <%= form.text_field :q %>
   <%= form.submit  "検索"%>
   <%end%>
@@ -21,20 +25,22 @@
 
 
 <% if @spaces.present? %>
-  <% @spaces.each do |space| %>
-    <h2><%= space.title %>
-    <% if !space.approval %>
-    (承認待ち)
-    <%elsif !space.available%>
-    (公開停止中)
+  <div class="spaces-container">
+    <% @spaces.each do |space| %>
+      <div class="space-card">
+        <h2><%= space.title %>
+          <% if !space.approval %>
+            (承認待ち)
+          <% elsif !space.available %>
+            (公開停止中)
+          <% end %>
+        </h2>
+        <p><%= truncate(space.subtitle, length: 80) %></p>
+        <%= link_to "詳細を見る", space %>
+      </div>
     <% end %>
-    </h2>
-    <p><%= truncate(space.subtitle, length: 80) %>
-    <%= link_to "詳細を見る", space %></p>
-
-    
-  <% end %>
-  <%= paginate @spaces%>
+  </div>
+  <%= paginate @spaces %>
 <% else %>
-  <p>スペースが存在しません。</p>
+  <p class="empty-message">スペースが存在しません。</p>
 <% end %>

@@ -1,6 +1,10 @@
 <% @page_title = @space.title + " - " + @space.owner.name + "さんのスペース" %>
 <h1>
-    <%= @space.owner.name %>さんのスペース    
+    <%= @space.owner.name %>さんのスペース    評価：<%=@space.average%>  
+    <%=render "likes"%>
+    <%if current_user%>
+<p><%= link_to "予約する", new_space_reservation_path(@space),class: "button" %></p>
+<%end%>
     <%if current_owner%>
         <% if !@space.approval %>
         (承認待ち)
@@ -12,16 +16,19 @@
     <%end%>
 
 </h1>
+<div class="space-container">
 <h2><%= @space.title %></h2>
 <h4><%= @space.subtitle %></h4>
 <% if @space.owner == current_owner %>
-    <%= link_to "登録情報を編集する", edit_owner_space_path(current_owner) %>
+    <%= link_to "登録情報を編集する", edit_owner_space_path(current_owner),class: "button" %>
     <% if @space.available%>
         <%= link_to "スペースの公開を停止する", [:private_available, @space],
+        class: "button",
         method: :patch, class: "button",
         data: { confirm: "スペースの公開を停止しますか?" }%>
     <% elsif%>
         <%= link_to "スペースを公開する", [:public_available, @space],
+        class: "button",
         method: :patch, class: "button",
         data: { confirm: "スペースを公開しますか?" }%>
     <%= link_to "スペースの削除", [@owner,@space], method: :delete,
@@ -29,22 +36,23 @@
     <% end%>
     
 <%end%>
-<p>予約可能時間：<%=@space.available_start_time.strftime( "%Y年%m月%d日%H:%M" )%> ~ <%=@space.available_end_time.strftime("%Y年%m月%d日%H:%M" )%></p>
-<p>1時間あたり料金：<%=@space.price%>円</p>
-<p>収容人数：<%=@space.capacity%>人</p>
-<p>支払い方法：
-    <%if @space.payment == 1%>
-        現金のみ
-    <%elsif @space.payment == 2%>
-        クレジットカードのみ
-    <%else%>
-        現金・クレジットカード
-    <%end%>
-    </p>
+<div class="space-info">
+  <p><i class="icon fa fa-clock"></i><span>予約可能時間：<%=@space.available_start_time.strftime("%Y年%m月%d日%H:%M")%> ~ <%=@space.available_end_time.strftime("%Y年%m月%d日%H:%M")%></span></p>
+  <p><i class="icon fa fa-yen-sign"></i><span>1時間あたり料金：<%= @space.price %>円</span></p>
+  <p><i class="icon fa fa-users"></i><span>収容人数：<%= @space.capacity %>人</span></p>
+  <p><i class="icon fa fa-credit-card"></i><span>支払い方法：
+    <% if @space.payment == 1 %>
+      現金のみ
+    <% elsif @space.payment == 2 %>
+      クレジットカードのみ
+    <% else %>
+      現金・クレジットカード
+    <% end %>
+  </span></p>
+</div>
 
-<%if current_user%>
-<p><%= link_to "予約する", new_space_reservation_path(@space) %></p>
-<%end%>
+
+
 
 <% if @genres.present? %>
 <p>
@@ -60,9 +68,9 @@
   <%end%>
     </p>
 <%end%>
-<%=render "likes"%>
-<%= simple_format(@space.detail) %>
 
+<%= simple_format(@space.detail) %>
+</div>
 <h2>レビュー</h2>
 <%=render "reviews"%>
 

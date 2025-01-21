@@ -1,4 +1,4 @@
-names = %w(taro owner2 owner3 owner4 owner5)
+names = %w(taro Jiro Owner Owner2 Owner3)
 0.upto(4) do |idx|
   owner = Owner.new(
     name: names[idx],
@@ -6,8 +6,8 @@ names = %w(taro owner2 owner3 owner4 owner5)
     phonenumber: "0120-666-554#{idx}",
     email: "#{names[idx]}@example.com",
     birthday: "1990-12-01",
-    password: "sppect",
-    password_confirmation: "sppect"
+    password: "sppect!",
+    password_confirmation: "sppect!"
   )
   if owner.save
     # puts "Created Owner: #{owner.name}"

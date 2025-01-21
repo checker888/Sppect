@@ -75,7 +75,7 @@ class ApplicationController < ActionController::Base
       formats: [:html]
   end
   private def rescue_forbidden(exception)
-    render "errors/forbidden", status: 403,
+    render "login/index", status: 403,
       formats: [:html]
   end
   rescue_from OwnerLoginRequired, with: :rescue_owner_login_required
