@@ -25,7 +25,7 @@ gem "email_validator", "~> 1.6"
 gem "bcrypt", "~>3.1.7"
 gem 'kaminari'
 gem 'kaminari-i18n'
-
+gem 'rails-erd'
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
