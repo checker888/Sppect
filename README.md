@@ -133,7 +133,7 @@
 
 ## セットアップについて
 授業の都合により、Gitの内容がDockerイメージの中身のみの更新となっているため、おそらくそのままCloneしただけでは動きません。
-動かす場合は、以下のコマンドを参考に各自でDockerイメージを作成・実行し、http://localhost:3000にアクセスしてください。
+動かす場合は、以下のコマンドを参考に各自でDockerイメージを作成・実行し、http://localhost:3000 にアクセスしてください。
 ```bash
 #Dockerイメージの作成
 docker build -t ns-rails:2024 .
@@ -144,6 +144,6 @@ docker exec -it rails24 bash
 #フォルダ移動
 cd sppect
 #依存関係のインストール
-#bundle install
+bundle install
 #アプリケーション立ち上げ
 bin/rails s -b 0.0.0.0 &
