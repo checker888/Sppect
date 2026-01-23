@@ -80,6 +80,10 @@
 - スペースの一覧・状態管理
 - 不適切なレビューやデータのチェック（想定）
 
+
+![TOP](./sc1.png)
+![RESERVE_SPACE](./sc2.png)
+![CREATE_SPACE](./sc3.png)
 ---
 
 ## 権限設計
