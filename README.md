@@ -131,8 +131,19 @@
 
 ---
 
-
-
-# 開発サーバーの起動
-bin/rails server
-# http://localhost:3000 にアクセス
+## セットアップについて
+授業の都合により、Gitの内容がDockerイメージの中身のみの更新となっているため、おそらくそのままCloneしただけでは動きません。
+動かす場合は、以下のコマンドを参考に各自でDockerイメージを作成・実行し、http://localhost:3000にアクセスしてください。
+```bash
+#Dockerイメージの作成
+docker build -t ns-rails:2024 .
+#コンテナ起動
+docker run -p 3000:3000 -v $(pwd)/rails:/var/www -w /var/www --name rails24 -d ns-rails:2024 tail -f /dev/null
+#コンテナへのログイン
+docker exec -it rails24 bash
+#フォルダ移動
+cd sppect
+#依存関係のインストール
+#bundle install
+#アプリケーション立ち上げ
+bin/rails s -b 0.0.0.0 &
